@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class ConfigurationActivity extends AppCompatActivity {
+public class ConfigurationActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton back;
     Context context = this;
@@ -20,7 +20,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
 
-        
+
     }
 
     @Override
