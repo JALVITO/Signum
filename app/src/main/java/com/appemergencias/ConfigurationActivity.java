@@ -10,35 +10,35 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 
 public class ConfigurationActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton back;
-    ScrollView numbers;
-    RecyclerView recyclerView;
-    RecyclerView.Adapter rva;
-    RecyclerView.LayoutManager rvlm;
+    ScrollView id;
+    //RecyclerView recyclerView;
+    //RecyclerView.Adapter rva;
+    //RecyclerView.LayoutManager rvlm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv);
-        recyclerView.setHasFixedSize(true);
-        rvlm = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(rvlm);
-
-        String[] myDataset = {"UNO", "DOS", "TRES"};
-        rva = new MyAdapter(myDataset);
+        //recyclerView = (RecyclerView) findViewById(R.id.rv);
+        //recyclerView.setHasFixedSize(true);
+        //rvlm = new LinearLayoutManager(this);
+        //recyclerView.setLayoutManager(rvlm);
+        //String[] myDataset = {"UNO", "DOS", "TRES"};
+        //rva = new MyAdapter(myDataset);
 
 
 
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
 
-        numbers = findViewById(R.id.number_list);
+        id = findViewById(R.id.number_list);
 
 
     }
@@ -50,8 +50,17 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
                 finish();
                 break;
             case R.id.add:
-                //numbers.addView();
+                id.addView(createLinearLayout());
                 break;
         }
+    }
+
+    public LinearLayout createLinearLayout(){
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        TextView tv = new TextView(this);
+        tv.setText("Hola");
+        layout.addView(tv);
+        return layout;
     }
 }

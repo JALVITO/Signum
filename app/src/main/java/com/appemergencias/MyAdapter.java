@@ -6,8 +6,11 @@ import android.view.ViewGroup;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private String[] mDataSet;
+    private ArrayList<String> mDataSet;
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView mTextView;
@@ -18,9 +21,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     }
 
-    public MyAdapter(String[] myDataSet){
+    public MyAdapter(ArrayList<String> myDataSet){
         this.mDataSet = myDataSet;
-
     }
 
     @Override
@@ -33,12 +35,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        holder.mTextView.setText(mDataSet[position]);
+        holder.mTextView.setText(mDataSet.get(position));
     }
 
     @Override
     public int getItemCount(){
-        return mDataSet.length;
+        return mDataSet.size();
     }
 
 }
