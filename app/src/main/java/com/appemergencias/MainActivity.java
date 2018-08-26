@@ -2,12 +2,14 @@ package com.appemergencias;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,6 +19,11 @@ import android.widget.TextView;
 import com.appemergencias.Adapters.MessageButtonMain;
 import com.appemergencias.Adapters.MessageButtonsConfigurationAdapter;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import static com.appemergencias.R.drawable.baseline_settings_black_18dp;
@@ -36,9 +43,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttons.add("Estoy bien");
-        buttons.add("Estoy mal");
-        buttons.add("Nombre");
+        readNewLocallyMessages();
+
+        //buttons.add("Estoy bien");
+        //buttons.add("Estoy mal");
+        //buttons.add("Nombre");
 
         main_page = findViewById(R.id.main_page);
 
@@ -62,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonsRV.setLayoutManager(new LinearLayoutManager(this));
         buttonsRV.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
     }
 
     @Override
@@ -71,7 +82,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(context, ConfigurationActivity.class));
                 //main_page.setVisibility(View.GONE);
                 //config_page.setVisibility(View.VISIBLE);
+                writeNewLocallyMessages();
                 break;
+        }
+    }
+
+    public void readLocallyMessages(){
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(new File(context.getFilesDir(), "messages.txt")));
+            try {
+                String line = null;
+                while ((line = input.readLine()) != null) {
+                    buttons.add(line);
+                }
+            } finally {
+                input.close();
+
+            }
+        }
+        catch(Exception e) {
+            //Ignore
+            if(buttons.size()==0) {
+                buttons.add("Estoy bien");
+                buttons.add("Estoy mal");
+                writeLocallyMessages();
+            }
+        }
+    }
+
+    public void writeLocallyMessages(){
+        try{
+
+            PrintWriter output = new PrintWriter( new FileWriter(new File(context.getFilesDir(), "messages.txt")));
+            try{
+                for(int i=0; i<buttons.size();i++)
+                    output.println(buttons.get(i));
+
+            }finally{
+                output.close();
+            }
+        }catch(Exception e){
+            //Ignore
+        }
+    }
+    public void writeNewLocallyMessages(){
+        SharedPreferences settings = getSharedPreferences("com.appemergencias", MODE_PRIVATE);
+
+        // Writing data to SharedPreferences
+        SharedPreferences.Editor editor = settings.edit();
+        editor.clear();
+        for(int i=0; i<buttons.size();i++)
+            editor.putString(String.valueOf(i), buttons.get(i));
+
+        editor.apply();
+    }
+    public void readNewLocallyMessages(){
+        SharedPreferences settings = getSharedPreferences("com.appemergencias", MODE_PRIVATE);
+
+        // Reading from SharedPreferences
+        String s = null;
+        int i=0;
+        while(!(s=settings.getString(String.valueOf(i), "")).isEmpty()){
+            buttons.add(s);
+            i++;
         }
     }
 }

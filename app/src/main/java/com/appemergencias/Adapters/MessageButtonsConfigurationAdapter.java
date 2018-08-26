@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.appemergencias.MainActivity;
 import com.appemergencias.R;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class MessageButtonsConfigurationAdapter extends RecyclerView.Adapter<Mes
             public void onClick(View view) {
                 listButtons.remove(position);
                 notifyDataSetChanged();
+
             }
         });
     }
