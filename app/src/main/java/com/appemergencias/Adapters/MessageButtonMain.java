@@ -1,6 +1,8 @@
 package com.appemergencias.Adapters;
 
+import android.bluetooth.BluetoothClass;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.appemergencias.MainActivity;
+import com.appemergencias.MyService;
 import com.appemergencias.R;
 
 import java.util.ArrayList;
@@ -33,7 +37,7 @@ public class MessageButtonMain extends RecyclerView.Adapter<MessageButtonMain.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageButtonMain.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessageButtonMain.ViewHolder holder, final int position) {
         holder.mensaje.setText(listButtons.get(position));
         if(position == 0){
             holder.mensaje.setBackgroundTintList(context.getResources().getColorStateList(R.color.estoyBien));
@@ -41,6 +45,13 @@ public class MessageButtonMain extends RecyclerView.Adapter<MessageButtonMain.Vi
         if(position == 1){
             holder.mensaje.setBackgroundTintList(context.getResources().getColorStateList(R.color.estoyMal));
         }
+        holder.mensaje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.numberOfEmergencyMessage = position;
+                context.startService(new Intent(context, MyService.class));
+            }
+        });
     }
     @Override
     public int getItemCount() {

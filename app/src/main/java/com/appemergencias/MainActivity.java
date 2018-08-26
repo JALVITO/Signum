@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView buttonsRV;
     MessageButtonMain adapter;
 
+    public static int numberOfEmergencyMessage = -1;
+
+
     Context context = this;
     public static ArrayList<String> buttons = new ArrayList<>();
 
@@ -53,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         conf = findViewById(R.id.configuration);
         conf.setOnClickListener(this);
-
-
-
     }
 
     @Override
@@ -80,25 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.configuration:
                 startActivity(new Intent(context, ConfigurationActivity.class));
-                //main_page.setVisibility(View.GONE);
-                //config_page.setVisibility(View.VISIBLE);
-                writeNewLocallyMessages();
                 break;
         }
     }
 
-
-    public void writeNewLocallyMessages(){
-        SharedPreferences settings = getSharedPreferences("com.appemergencias", MODE_PRIVATE);
-
-        // Writing data to SharedPreferences
-        SharedPreferences.Editor editor = settings.edit();
-        editor.clear();
-        for(int i=0; i<buttons.size();i++)
-            editor.putString(String.valueOf(i), buttons.get(i));
-
-        editor.apply();
-    }
     public void readNewLocallyMessages(){
         SharedPreferences settings = getSharedPreferences("com.appemergencias", MODE_PRIVATE);
 
