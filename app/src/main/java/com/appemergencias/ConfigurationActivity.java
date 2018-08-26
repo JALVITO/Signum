@@ -2,6 +2,7 @@ package com.appemergencias;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -101,6 +102,7 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
                         @Override
                         public void onClick(View view) {
                             MainActivity.buttons.add(input.getText().toString());
+                            writeNewLocallyMessages();
                             dialog.dismiss();
                         }
                     });
@@ -139,5 +141,16 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
                 });
                 break;
         }
+    }
+    public void writeNewLocallyMessages(){
+        SharedPreferences settings = getSharedPreferences("com.appemergencias", MODE_PRIVATE);
+
+        // Writing data to SharedPreferences
+        SharedPreferences.Editor editor = settings.edit();
+        editor.clear();
+        for(int i=0; i<MainActivity.buttons.size();i++)
+            editor.putString(String.valueOf(i), MainActivity.buttons.get(i));
+
+        editor.apply();
     }
 }

@@ -87,44 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void readLocallyMessages(){
-        try {
-            BufferedReader input = new BufferedReader(new FileReader(new File(context.getFilesDir(), "messages.txt")));
-            try {
-                String line = null;
-                while ((line = input.readLine()) != null) {
-                    buttons.add(line);
-                }
-            } finally {
-                input.close();
 
-            }
-        }
-        catch(Exception e) {
-            //Ignore
-            if(buttons.size()==0) {
-                buttons.add("Estoy bien");
-                buttons.add("Estoy mal");
-                writeLocallyMessages();
-            }
-        }
-    }
-
-    public void writeLocallyMessages(){
-        try{
-
-            PrintWriter output = new PrintWriter( new FileWriter(new File(context.getFilesDir(), "messages.txt")));
-            try{
-                for(int i=0; i<buttons.size();i++)
-                    output.println(buttons.get(i));
-
-            }finally{
-                output.close();
-            }
-        }catch(Exception e){
-            //Ignore
-        }
-    }
     public void writeNewLocallyMessages(){
         SharedPreferences settings = getSharedPreferences("com.appemergencias", MODE_PRIVATE);
 
