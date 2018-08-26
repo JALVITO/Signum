@@ -45,14 +45,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.button:
                 //Ok
-                startActivity(new Intent(context, ConfigurationActivity.class));
                 break;
             case R.id.button2:
                 //Not ok
+
                 break;
             case R.id.configuration:
-                main_page.setVisibility(View.GONE);
-                config_page.setVisibility(View.VISIBLE);
+                startActivity(new Intent(context, ConfigurationActivity.class));
+                //main_page.setVisibility(View.GONE);
+                //config_page.setVisibility(View.VISIBLE);
                 break;
         }
     }

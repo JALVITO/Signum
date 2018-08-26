@@ -5,7 +5,7 @@
     tools:context=".MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#eeee"
     android:orientation="vertical">
 
     <ImageButton
@@ -14,34 +14,33 @@
         android:background="@drawable/ic_settings_black_24dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="10dp"
         />
 
     <Button
         android:id="@+id/button"
+        android:width= "360dp"
+        android:height= "200dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="I'm OK" />
+        android:text="I'm OK"
+        android:textSize="40dp"
+        android:background="#1ab602"
+        android:layout_margin="10dp"
+        />
 
     <Button
-        android:layout_gravity="center"
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:width="360dp"
+        android:height="200dp"
+        android:background="#c9000d"
         android:text="I'm not OK"
+        android:textSize="40dp"
+        android:layout_margin="10dp"
         />
-    <Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </Toolbar>
 </LinearLayout>
