@@ -6,11 +6,20 @@
 
     <Button
         android:id="@+id/mensaje"
+        android:layout_weight="8"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
+        android:layout_marginRight="5dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#0fffff"
+        android:backgroundTint="#e5e5e5"
         android:text="texto de prueba"/>
+
+    <ImageButton
+        android:id="@+id/eliminate"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_indeterminate_check_box_black_24dp"
+        />
 
 </LinearLayout>

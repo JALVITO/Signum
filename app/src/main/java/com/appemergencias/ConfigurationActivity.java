@@ -45,9 +45,9 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    private void setUpButtonsRecyclerView(){
+    private void setUpButtonsRecyclerView() {
         buttons = findViewById(R.id.rv);
-        adapter = new MessageButtonsConfigurationAdapter(MainActivity.buttons);
+        adapter = new MessageButtonsConfigurationAdapter(MainActivity.buttons, this);
         buttons.setLayoutManager(new LinearLayoutManager(this));
         buttons.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -95,14 +95,5 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
 
                 break;
         }
-    }
-
-    public LinearLayout createLinearLayout(){
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        TextView tv = new TextView(this);
-        tv.setText("Hola");
-        layout.addView(tv);
-        return layout;
     }
 }

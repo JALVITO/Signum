@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttons.add("Nombre");
-        buttons.add("Nombre");
+        buttons.add("Estoy bien");
+        buttons.add("Estoy mal");
         buttons.add("Nombre");
 
         main_page = findViewById(R.id.main_page);
