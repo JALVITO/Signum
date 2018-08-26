@@ -7,6 +7,8 @@
     tools:context=".ConfigurationActivity"
     android:background="#ffffff"
     android:orientation="vertical">
+
+
     <ImageButton
         android:layout_gravity="start"
         android:id="@+id/back"
@@ -14,63 +16,75 @@
         android:layout_width="39dp"
         android:layout_height="39dp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:textColor="#000000"
-        android:fontFamily="sans-serif"
-        android:textSize="20dp"
-        android:text="Add numbers to alert:"/>
     <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        >
-        <EditText
+        android:layout_height="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:width="250dp"
-            android:inputType="phone"
-            />
+            android:textColor="#42f49e"
+            android:fontFamily="sans-serif"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Agregar a Contactos"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv2"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </android.support.v7.widget.RecyclerView>
+
         <ImageButton
-            android:layout_gravity="end"
+            android:layout_gravity="center"
+            android:id="@+id/add2"
+            android:background="@drawable/ic_add_circle_black_24dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#42f49e"
+            android:fontFamily="sans-serif"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Messages"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </android.support.v7.widget.RecyclerView>
+
+        <ImageButton
+            android:layout_gravity="center"
             android:id="@+id/add"
             android:background="@drawable/ic_add_circle_black_24dp"
-            android:layout_width="39dp"
-            android:layout_height="39dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             />
+
     </LinearLayout>
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/number_list"
-        >
 
-    </ScrollView>
-
-
-    <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif"
-        android:textSize="20dp"
-        android:text="Messages"/>
-
-    <view class="android.support.v7.app.AlertController$RecycleListView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </view>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

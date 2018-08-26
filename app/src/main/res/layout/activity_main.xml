@@ -17,30 +17,14 @@
         android:layout_margin="10dp"
         />
 
-    <Button
-        android:id="@+id/button"
-        android:width= "360dp"
-        android:height= "200dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="I'm OK"
-        android:textSize="40dp"
-        android:background="#1ab602"
-        android:layout_margin="10dp"
-        />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvMain"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:width="360dp"
-        android:height="200dp"
-        android:background="#c9000d"
-        android:text="I'm not OK"
-        android:textSize="40dp"
-        android:layout_margin="10dp"
-        />
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
+
 
 </LinearLayout>

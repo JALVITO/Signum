@@ -15,26 +15,37 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.appemergencias.Adapters.ContactsButtonsConfigurationAdapter;
 import com.appemergencias.Adapters.MessageButtonsConfigurationAdapter;
+
+import java.util.ArrayList;
 
 
 public class ConfigurationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton back, add;
-    RecyclerView buttons;
+    ImageButton back, add, add2;
+    RecyclerView buttons, buttons2;
     MessageButtonsConfigurationAdapter adapter;
+    ContactsButtonsConfigurationAdapter adapter2;
     Context context = this;
+    public static ArrayList<String> buttonsArraylist2 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        back = findViewById(R.id.back);
+        buttonsArraylist2.add("Juan");
+        buttonsArraylist2.add("Pedro");
+        buttonsArraylist2.add("Roberto");
 
+        back = findViewById(R.id.back);
         add = findViewById(R.id.add);
+        add2 = findViewById(R.id.add2);
+
         back.setOnClickListener(this);
         add.setOnClickListener(this);
+        add2.setOnClickListener(this);
     }
 
     @Override
@@ -46,11 +57,19 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
 
 
     private void setUpButtonsRecyclerView() {
+        //Mensajes
         buttons = findViewById(R.id.rv);
         adapter = new MessageButtonsConfigurationAdapter(MainActivity.buttons, this);
         buttons.setLayoutManager(new LinearLayoutManager(this));
         buttons.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        //Contactos
+        buttons2 = findViewById(R.id.rv2);
+        adapter2 = new ContactsButtonsConfigurationAdapter(buttonsArraylist2, this);
+        buttons2.setLayoutManager(new LinearLayoutManager(this));
+        buttons2.setAdapter(adapter2);
+        adapter2.notifyDataSetChanged();
     }
 
 
@@ -93,6 +112,31 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
                     alert.setPositiveButton("Okay", null);
                 }
 
+                break;
+            case R.id.add2:
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setTitle("Agregar contacto");
+                alert.setMessage("Este contacto sera alertado al estar en una emergencia.");
+
+                final EditText input = new EditText(this);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                input.setLayoutParams(params);
+                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                alert.setView(input);
+                alert.setPositiveButton("Agregar", null);
+                alert.setNegativeButton("Cancelar", null);
+
+                final AlertDialog dialog = alert.create();
+                dialog.show();
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        buttonsArraylist2.add(input.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
                 break;
         }
     }
