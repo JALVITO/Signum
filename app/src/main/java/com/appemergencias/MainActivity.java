@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import static com.appemergencias.R.drawable.baseline_settings_black_18dp;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -19,11 +21,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton conf;
     LinearLayout main_page, config_page;
     Context context = this;
+    public static ArrayList<String> buttons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        buttons.add("Nombre");
+        buttons.add("Nombre");
+        buttons.add("Nombre");
 
         main_page = findViewById(R.id.main_page);
 

@@ -2,46 +2,57 @@ package com.appemergencias;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.appemergencias.Adapters.MessageButtonsConfigurationAdapter;
+
 
 public class ConfigurationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton back;
-    ScrollView id;
-    //RecyclerView recyclerView;
-    //RecyclerView.Adapter rva;
-    //RecyclerView.LayoutManager rvlm;
+    ImageButton back, add;
+    RecyclerView buttons;
+    MessageButtonsConfigurationAdapter adapter;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        //recyclerView = (RecyclerView) findViewById(R.id.rv);
-        //recyclerView.setHasFixedSize(true);
-        //rvlm = new LinearLayoutManager(this);
-        //recyclerView.setLayoutManager(rvlm);
-        //String[] myDataset = {"UNO", "DOS", "TRES"};
-        //rva = new MyAdapter(myDataset);
-
-
-
         back = findViewById(R.id.back);
+
+        add = findViewById(R.id.add);
         back.setOnClickListener(this);
+        add.setOnClickListener(this);
+    }
 
-        id = findViewById(R.id.number_list);
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setUpButtonsRecyclerView();
 
     }
+
+
+    private void setUpButtonsRecyclerView(){
+        buttons = findViewById(R.id.rv);
+        adapter = new MessageButtonsConfigurationAdapter(MainActivity.buttons);
+        buttons.setLayoutManager(new LinearLayoutManager(this));
+        buttons.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -50,7 +61,38 @@ public class ConfigurationActivity extends AppCompatActivity implements View.OnC
                 finish();
                 break;
             case R.id.add:
-                id.addView(createLinearLayout());
+                if(MainActivity.buttons.size() < 10){
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("Agregar mensaje");
+                    alert.setMessage("Este mensaje sera parte de sus mensajes por default al estar en una emergencia.");
+
+                    final EditText input = new EditText(this);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    input.setLayoutParams(params);
+                    // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                    input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                    alert.setView(input);
+                    alert.setPositiveButton("Agregar", null);
+                    alert.setNegativeButton("Cancelar", null);
+
+                    final AlertDialog dialog = alert.create();
+                    dialog.show();
+
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            MainActivity.buttons.add(input.getText().toString());
+                            dialog.dismiss();
+                        }
+                    });
+                }
+                else{
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("Agregar mensaje");
+                    alert.setMessage("Lo sentimos, solo puede tener 10 mensajes.");
+                    alert.setPositiveButton("Okay", null);
+                }
+
                 break;
         }
     }
